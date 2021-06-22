@@ -1,0 +1,13 @@
+create table Marks(Roll_no int primary key,Name  varchar(20) , Marks int);
+insert into  Marks values(1206 , 'Mrunalini' , 79);
+insert into  Marks values(1207 , 'Nikitha  ' , 89);
+insert into  Marks values(1211 , 'Tejaswini' , 79);
+insert into  Marks values(1219 , 'Sanjana  ' , 88);
+insert into  Marks values(1237 , 'TejaSri  ' , 85);
+select *from Marks;
+delete from Marks where Roll_no = 1206;
+select *from Marks;
+update Marks set Marks = 84 where Roll_no = 1211;
+select *from Marks;
+alter table Marks add age int ;
+select *from Marks;
