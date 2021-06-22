@@ -1,0 +1,32 @@
+USE BR;
+create table Ticket(Ticket_id int primary key , date1 date , Seat_number int , Amount int);
+insert into Ticket values(1232 , '2021-09-03' , 2 ,  1500);
+insert into Ticket values(1262 , '2021-09-03' , 5 ,  1600);
+insert into Ticket values(1245 , '2021-09-03' , 23 , 1100);
+insert into Ticket values(1265 , '2021-09-03' , 9 ,  1200);
+delete from Ticket Where Ticket_id=1265;
+alter table Ticket drop Seat_number;
+select *from Ticket;
+select * from Ticket WHERE amount>1500;
+
+
+create table Person(Person_id int primary key , Name varchar(15) , Age int,P_sex char(15));
+insert into Person values(12543 , 'XYZ' , 23,'Male');
+insert into Person values(12234 , 'ABC' , 21,'Female');
+insert into Person values(12123 , 'LMN' , 30,'Female');
+update Person set Name = 'SDA' where Person_id = 12123;
+alter Table Person modify P_Sex varchar(10);
+alter TABLE Person change Name  P_Name varchar(10);
+Select * from Person ;
+
+
+create table Bus(Bus_no varchar(10) ,Arrival_time varchar(10), Route varchar(30) );
+insert into Bus values('TS10AS1234' ,'18:00' ,'Hyderabad->Chennai');
+insert into Bus values('TS23RD2345' , '15:30' ,'Hyderabad->Bangalore');
+insert into Bus values('KA34DF3456' ,'12:00' , 'Bangalore->Chennai');
+alter Table Bus add Departure_time varchar(10);
+select *from Bus;
+
+
+-- Your code here!
+
