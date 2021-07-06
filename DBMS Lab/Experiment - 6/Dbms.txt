@@ -1,0 +1,20 @@
+/*Experiment -6*/
+create table Customer(cus_id int primary key,Name  varchar(20) );
+insert into  Customer values(100 , 'Ruhi');
+insert into  Customer values(101 , 'Dolly');
+insert into  Customer values(102 , 'Hari' );
+insert into  Customer values(103 , 'Nithiya');
+create table Rev(rev_id int primary key , cus_id int , date1 date , foreign key(cus_id) references Customer(cus_id));
+insert into  Rev values(1 , 100, '2021-06-26');
+insert into  Rev values(2 , 101, '2021-06-27');
+insert into  Rev values(3 , 102, '2021-06-28');
+insert into  Rev values(4 , 103, '2021-06-29');
+select *from Customer;
+select *from Rev;
+select cus_id from Customer where cus_id <> ALL(select rev_id from Rev);
+select cus_id as id from Customer where cus_id = ANY(select cus_id from Rev);
+select cus_id as id from Customer where cus_id in (select cus_id from Rev);
+select cus_id as id from Customer where cus_id = SOME(select cus_id from Rev);
+select cus_id as id, Name as c_name from Customer where cus_id <> all(select cus_id from Rev where cus_id > 2);
+select cus_id as id from Customer where cus_id < 4 union select cus_id from Rev where date1 = '2021-06-29' ;
+select *from Rev where rev_id in (2,4);
