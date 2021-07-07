@@ -1,0 +1,39 @@
+#include <stdio.h>
+void find_wait(int proc[],int n,int bt[],int wt[])
+{
+	wt[0] = 0;
+	int i;
+	for(i = 1;i<n;i++)
+		wt[i] = bt[i-1] + wt[i-1];
+}
+void find_tat(int proc[],int n,int bt[],int wt[],int tat[])
+{
+	int i;
+	for(i=0;i<n;i++)
+		tat[i] = bt[i] + wt[i];
+}
+void find_avg(int proc[],int n, int b1[])
+{
+	int wt[n], tat[n],total_w =0,total_t = 0,i,s,total;
+	find_wait(proc,n,b1,wt);
+	find_tat(proc,n,b1,wt,tat);
+	printf("Processes\tBurst Time\tWaiting Time\tTurn Around Time\n");
+	for(i=0;i<n;i++)
+	{
+		total_w += wt[i];
+		total_t += tat[i];
+		printf("%d\t\t%d\t\t%d\t\t%d\n",(i+1),b1[i],wt[i],tat[i]);
+	}
+	s =(float)total_w/(float)n;
+	total = (float)total_t/(float)n;
+	printf("Average waiting time = %d\n",s);
+	printf("Average turn around time = %d\n",total);
+}
+int main(){
+	int proc[] = {1,2,3,4,5};
+	int n = sizeof proc / sizeof proc[0];
+	int b_time[] = {5,4,3,2,4};
+	
+	find_avg(proc,n,b_time);
+	return 0;
+}
