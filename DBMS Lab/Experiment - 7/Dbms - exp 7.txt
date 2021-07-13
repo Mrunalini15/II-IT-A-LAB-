@@ -1,0 +1,25 @@
+create database SM;
+USE SM;
+create table Student (Roll_no int primary key , Name varchar(15) , Marks int , Bus_no int);
+insert into Student values(1123 , 'ABC' ,98 , 5),(1234 , 'DEF' ,89 , 6),(1765 , 'GHI' ,76 , 5),(1654 , 'JKL' ,80 , 3),(1435 , 'MNO' ,92 , 2),(1876 , 'PQR' ,70 , 3);
+
+select *from Student;
+select avg(marks) from Student;
+select min(marks) from Student;
+select max(marks) from Student;
+select sum(marks) from Student;
+select count(*) from Student;
+
+select * from Student where marks < (select max(marks) from Student);
+select * from Student where marks > (select avg(marks) from Student);
+select count(*) from Student where marks <= (select avg(marks) from Student);
+select Bus_no ,count(*) as stud_count from Student group by Bus_no;
+select Bus_no ,count(*) as no_avg_of_bus from Student group by Bus_no having avg(marks);
+select Name from Student group by(name) having sum(marks) > 90;
+
+create view student_less_than_avg as select Roll_no,Name,Marks from Student where marks <= 85;
+select * from student_less_than_avg;
+
+select Roll_no , Name , Marks from Student where Bus_no in(3,5);
+
+select Roll_no from Student group by(Roll_no) having avg(marks) > 85;
