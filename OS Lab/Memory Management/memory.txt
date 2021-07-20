@@ -1,0 +1,56 @@
+#include <stdio.h>
+struct pstruct
+{
+	int fno;
+	int p_b;
+}p_t[10];
+int pm_s,lm_s,p_s,frame,page,f_t[20],f_n;
+	
+void info()
+{
+	printf("MEMORY MANAGEMENT USING PAGING\n");
+	printf("\nEnter the Size of Physical memory: ");
+	scanf("%d",&pm_s);
+	printf("\nEnter the size of Logical memory: ");
+	scanf("%d",&lm_s);
+	printf("\nEnter the partition size: ");
+	scanf("%d",&p_s);
+	frame = (int) pm_s/p_s;
+	page = (int) lm_s/p_s;
+	printf("\nThe physical memory is divided into %d no.of frames\n",frame);
+	printf("\nThe Logical memory is divided into %d no.ofpages",page);
+}
+
+void assign()
+{
+	int i;
+	for (i=0;i<page;i++)
+	{
+	    p_t[i].fno = -1;
+	    p_t[i].p_b= -1;
+	}
+	for(i=0; i<frame;i++)
+		f_t[i] = 32555;
+	for (i=0;i<page;i++)
+	{
+	    printf("\nEnter the Frame number where page %d must be placed: ",i);
+		scanf("%d",&f_n);
+		f_t[f_n] = i;
+		if(p_t[i].p_b == -1)
+		{
+			p_t[i].fno = f_n;
+			p_t[i].p_b = 1;
+		}
+	}
+	printf("\nPAGE TABLE\n\n");
+	printf("PageAddressFrameNo. PresenceBit\n");
+	for (i=0;i<page;i++)
+		printf("%d\t\t%d\t\t%d\n",i,p_t[i].fno,p_t[i].p_b);
+}
+
+void main()
+{
+	system("clear");
+	info();
+	assign();
+}
