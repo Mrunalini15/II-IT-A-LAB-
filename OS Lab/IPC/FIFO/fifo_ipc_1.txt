@@ -1,0 +1,26 @@
+#include <stdio.h>
+#include <string.h>
+#include <fcntl.h>
+#include <sys/stat.h>
+#include <sys/types.h>
+#include <unistd.h>
+int main()
+{
+int fd2;
+// FIFO file path
+char * mfifo = "/tmp/mfifo";
+mkfifo(mfifo, 0666);
+char s[80], s1[80];
+while (1)
+{
+fd2 = open(mfifo,O_RDONLY); 
+read(fd2, s, 80);
+printf("User1: %s\n", s); 
+close(fd2);
+fd2 = open(mfifo,O_WRONLY);
+fgets(s, 80, stdin);
+write(fd2, s1, strlen(s1)+1);
+close(fd2);
+}
+return 0;
+}

@@ -1,0 +1,25 @@
+#include <stdio.h>
+#include <string.h>
+#include <fcntl.h>
+#include <sys/stat.h>
+#include <sys/types.h>
+#include <unistd.h>
+int main()
+{
+int fd1;
+char * mfifo = "/tmp/mfifo"; 
+mkfifo(mfifo, 0666);
+char a[180], b[80];
+while (1)
+{
+fd1 = open(mfifo, O_WRONLY);
+fgets(a, 80, stdin);
+write(fd1, b, strlen(b)+1);
+close(fd1);
+fd1 = open(mfifo, O_RDONLY); 
+read(fd1, a, sizeof(a));
+printf("User2: %s\n", a); 
+close(fd1);
+}
+return 0;
+}
